@@ -2,6 +2,8 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
 
 // Startup
 var app = express();
@@ -17,8 +19,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routing Table
-var main = require('/routes');
-app.get('/', main.index);
+var main = require('./routes');
+//app.get('/', main.index);
 
 // Listen
 app.listen(PORT);
