@@ -19,8 +19,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routing Table
-var main = require('./routes');
-//app.get('/', main.index);
+var main = require('./hw-interface');
 
 // Listen
 app.listen(PORT);
