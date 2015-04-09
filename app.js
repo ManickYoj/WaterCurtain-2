@@ -19,7 +19,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routing Table
-var main = require('./hw-interface');
+var hw = require('./hw-interface');
+hw.runPattern();
 
 // Listen
 app.listen(PORT);
