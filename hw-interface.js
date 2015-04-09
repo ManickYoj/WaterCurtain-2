@@ -43,7 +43,7 @@ module.exports.runPattern = function (pattern) {
 function runPatternRecursive (pattern) {
     if (pinList.length > pattern[0].length) throw RangeError("Pattern too large for available valves.");
 
-    for (var i = 0; i < row.length, i++)
+    for (var i = 0; i < row.length; i++)
          bs.digitalWrite(pinList[i], Boolean(row[i]) ? bs.HIGH : bs.LOW);
 
     reduced_pattern = pattern.slice(1);
