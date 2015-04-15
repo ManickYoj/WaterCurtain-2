@@ -1,6 +1,6 @@
 var http = require('http');
 var fs = require('fs');
-//var hw = require('./hw-interface');
+var hw = require('./hw-interface');
 
 // WebApp Config
 var PORT = process.env.PORT || 3000;
@@ -12,15 +12,14 @@ var ROUTES = {
 function index(req, res) {
     if (req.method === 'GET') loadHTML(req, res, './index.html');
     else if (req.method === 'POST') {
-        console.log(req);
-        try {
-            hw.runPattern(JSON.parse(req.body));
-        }
+        var data = '';
 
-        catch (err) {
-            res.writeHead(500);
-            res.end();
-        }
+        req.addListener('data', function(chunk) { data += chunk; });
+        req.addListener('end', function() {
+            hw.runPattern(JSON.parse(data).pattern);
+            res.writeHead(200, {'content-type': 'text/plain' });
+            res.end()
+        });
     }
 }
 
