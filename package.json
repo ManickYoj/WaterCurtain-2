@@ -16,5 +16,7 @@
     "url": "https://github.com/ManickYoj/WaterCurtain-2/issues"
   },
   "homepage": "https://github.com/ManickYoj/WaterCurtain-2",
-  "dependencies": {}
+  "dependencies": {
+    "bonescript": "^0.2.4"
+  }
 }

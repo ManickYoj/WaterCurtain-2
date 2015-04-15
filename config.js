@@ -1,7 +1,7 @@
 module.exports = {
-    ON_DURATION: 100,
-    OFF_DURATION: 100,
-    PIN_LIST: genPinList("P8", 9, 5)
+    ROW_DURATION: 100,
+    PIN_LIST: genPinList("P8", 9, 5),
+    TEST_MODE: true
 };
 
 function genPinList (header, start, number) {
@@ -12,3 +12,4 @@ function genPinList (header, start, number) {
 
     return pinList;
 }
+
