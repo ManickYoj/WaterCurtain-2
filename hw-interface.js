@@ -9,12 +9,12 @@ var logLine = function (row, offset) {
 }
 
 var outputLine = function (row, offset) {
+    offset = offset || 0;
     for (var i = offset; i < row.length + offset; i++)
         bs.digitalWrite(cf.PIN_LIST[i], Boolean(row[i]) ? bs.HIGH : bs.LOW);
 }
 
 var closeAll = function () {
-
     WRITE_FUNC(new Array(cf.PIN_LIST.length));
 }
 
