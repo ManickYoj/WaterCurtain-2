@@ -49,3 +49,4 @@ var server = http.createServer( function (req, res) {
         res.writeHead(404, { 'Content-Type': 'text/html' });
     }
 }).listen(PORT);
+console.log("Server listening on port " + PORT + ".");
