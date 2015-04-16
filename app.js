@@ -16,7 +16,7 @@ function index(req, res) {
 
         req.addListener('data', function(chunk) { data += chunk; });
         req.addListener('end', function() {
-            hw.runPattern(JSON.parse(data).pattern);
+            hw.queuePattern(JSON.parse(data).pattern);
             res.writeHead(200, {'content-type': 'text/plain' });
             res.end();
         });

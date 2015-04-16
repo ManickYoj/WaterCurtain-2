@@ -18,6 +18,16 @@ var closeAll = function () {
     WRITE_FUNC(new Array(cf.PIN_LIST.length));
 }
 
+/** -- queuePattern
+*   Adds a pattern to the pattern_queue and, if no pattern is currently being run,
+*   kicks off a new runPatterns thread.
+*/
+
+var queuePattern = function(pattern) {
+    pattern_queue.push(pattern);
+    if (pattern_queue.length !== 0) runPattern(pattern_queue[0]);
+}
+
 /** -- runPattern
 *   Recursively works its way through a pattern, turning the valves on or off, as
 *   specified by the pattern. Each pattern row is activated for the ROW_DURATION
@@ -35,7 +45,15 @@ var runPattern = function(pattern) {
         setTimeout(function () { runPattern(reduced_pattern); }, cf.ROW_DURATION);
 
     // Turn off valves after completion
-    else setTimeout(function () { closeAll(); }, cf.ROW_DURATION);
+    else {
+        setTimeout(function () {
+            closeAll();
+
+            // Load in the next pattern
+            pattern_queue.shift();
+            if (!pattern_queue.empty) runPattern(pattern_queue.length !== 0);
+        }, cf.ROW_DURATION);
+    }
 }
 
 /* ----- RUNNING CODE ----- */
@@ -45,4 +63,5 @@ WRITE_FUNC = cf.TEST_MODE ? logLine : outputLine;
 // Setup Pins
 if (!cf.TEST_MODE) for (var i=0; i < cf.PIN_LIST.length; i++) bs.pinMode(cf.PIN_LIST[i], bs.OUTPUT);
 
-module.exports.runPattern = runPattern;
+pattern_queue = [];
+module.exports.queuePattern = queuePattern;
