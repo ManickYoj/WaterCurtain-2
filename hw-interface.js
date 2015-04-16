@@ -25,7 +25,7 @@ var closeAll = function () {
 
 var queuePattern = function(pattern) {
     pattern_queue.push(pattern);
-    if (pattern_queue.length === 0) runPattern(pattern_queue[0]);
+    if (pattern_queue.length === 1) runPattern(pattern_queue[0]);
 }
 
 /** -- runPattern
