@@ -3,10 +3,10 @@ var fs = require('fs');
 var hw = require('./hw-interface');
 
 // WebApp Config
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8888;
 var ROUTES = {
     '/' : index
-}
+};
 
 // Define request handler
 function index(req, res) {
@@ -18,10 +18,10 @@ function index(req, res) {
         req.addListener('end', function() {
             hw.runPattern(JSON.parse(data).pattern);
             res.writeHead(200, {'content-type': 'text/plain' });
-            res.end()
+            res.end();
         });
     }
-}
+};
 
 // Utility method for loading and serving an HTML file
 function loadHTML(req, res, filepath) {
@@ -38,13 +38,7 @@ function loadHTML(req, res, filepath) {
             res.end(content, 'utf-8');
         }
     });
-}
-
-
-function pattern (req, res) {
-    var patternJson = JSON.parse(data);
-    console.log(pattern)
-}
+};
 
 
 // Listen
