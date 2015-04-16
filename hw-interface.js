@@ -27,7 +27,7 @@ var runPattern = function(pattern) {
     if (cf.PIN_LIST.length > pattern[0].length) throw RangeError("Pattern too wide for available valves.");
 
     // Set valves
-    this.WRITE_FUNC(pattern[0]);
+    WRITE_FUNC(pattern[0]);
 
     // Move to next row and continue after waiting for the ROW_DURATION
     var reduced_pattern = pattern.slice(1);
@@ -40,7 +40,7 @@ var runPattern = function(pattern) {
 
 /* ----- RUNNING CODE ----- */
 // Set up test mode or output mode based on config
-this.WRITE_FUNC = cf.TEST_MODE ? logLine : outputLine;
+WRITE_FUNC = cf.TEST_MODE ? logLine : outputLine;
 
 // Setup Pins
 if (!cf.TEST_MODE) for (var i=0; i < cf.PIN_LIST.length; i++) bs.pinMode(cf.PIN_LIST[i], bs.OUTPUT);
