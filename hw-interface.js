@@ -50,7 +50,7 @@ var runPattern = function(pattern) {
             closeAll();
 
             // Load in the next pattern
-            pattern_queue.unshift();
+            pattern_queue.shift();
             if (pattern_queue.length !== 0) runPattern(pattern_queue[0]);
         }, cf.ROW_DURATION);
     }
