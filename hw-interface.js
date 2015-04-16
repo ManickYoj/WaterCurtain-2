@@ -51,7 +51,7 @@ var runPattern = function(pattern) {
 
             // Load in the next pattern
             pattern_queue.unshift();
-            if (!pattern_queue.empty) runPattern(pattern_queue.length !== 0);
+            if (pattern_queue.length !== 0) runPattern(pattern_queue[0]);
         }, cf.ROW_DURATION);
     }
 }
