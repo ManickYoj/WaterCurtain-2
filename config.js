@@ -1,6 +1,6 @@
 module.exports = {
-    ROW_DURATION: 1000,
-    PIN_LIST: genPinList("P8", 9, 5),
+    ROW_DURATION: 100,
+    PIN_LIST: genPinList("P8", 9, 10),
     TEST_MODE: false
 };
 
