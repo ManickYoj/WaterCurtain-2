@@ -14,7 +14,8 @@ var outputLine = function (row, offset) {
 }
 
 var closeAll = function () {
-    this.WRITE_FUNC(new Array(cf.PIN_LIST.length));
+
+    WRITE_FUNC(new Array(cf.PIN_LIST.length));
 }
 
 /** -- runPattern
