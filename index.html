@@ -1,34 +1,21 @@
 <html>
     <head>
-
+        <link href="main.css" rel="stylesheet" type="text/css">
+        <script src="main.js"></script>
     </head>
     <body>
-        Hello World
-        <button onclick="post('')">Click</button>
-        <script>
-            function post(url)
-            {
-                var xmlhttp;
+        <div class="flex-parent flex-hcenter flex-vcenter full-height">
+            <div id="content">
+                <div id="pattern-control">
+                    <!-- pattern-squares display here -->
+                </div>
+                <div class="flex-parent flex-hcenter">
+                    <button onclick="sendPattern()"> to the curtain </button>
+                </div>
+            </div>
+        </div>
 
-                // IE7+, Firefox, Chrome, Opera, Safari
-                if (window.XMLHttpRequest) xmlhttp=new XMLHttpRequest();
-
-                // IE6, IE5
-                else xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-
-                xmlhttp.open("POST", url, true);
-                xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                xmlhttp.send(JSON.stringify({
-                    pattern: [
-                                [1,0,0,0,0],
-                                [0,1,0,0,0],
-                                [0,0,1,0,0],
-                                [0,0,0,1,0],
-                                [0,0,0,0,1]
-                             ]
-                }));
-            }
-        </script>
+        <script>reload();</script>
     </body>
 </html>
 

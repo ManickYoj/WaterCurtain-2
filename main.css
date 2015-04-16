@@ -1,0 +1,23 @@
+html, body { height: 100%; }
+
+.full-height { height: 100%; }
+
+.flex-parent { display: flex; }
+.flex-hcenter { justify-content: center; }
+.flex-vcenter { align-items: center; }
+
+#content {}
+#pattern-control { border: 1px solid #222; }
+
+.pattern-row {}
+.pattern-box {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    border: 1px solid #222;
+    box-sizing: border-box;
+}
+.pattern-box:hover { border-color: white; }
+
+[data-set=false] { background-color: transparent; }
+[data-set=true] { background-color: #222; }

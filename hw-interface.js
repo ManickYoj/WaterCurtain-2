@@ -24,8 +24,10 @@ var closeAll = function () {
 */
 
 var queuePattern = function(pattern) {
-    pattern_queue.push(pattern);
-    if (pattern_queue.length === 1) runPattern(pattern_queue[0]);
+    if( Object.prototype.toString.call( pattern ) === '[object Array]' ) {
+        pattern_queue.push(pattern);
+        if (pattern_queue.length === 1) runPattern(pattern_queue[0]);
+    }  else console.error("Invalid pattern submission: " + pattern)
 }
 
 /** -- runPattern
