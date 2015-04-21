@@ -1,6 +1,6 @@
 //CONFIG
-ROWS = 10;
-COLS = 10;
+ROWS = 20;
+COLS = 60;
 pattern = [];
 
 function reload() {
