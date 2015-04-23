@@ -1,16 +1,12 @@
 /* -- FONTS -- */
-@font-face {
-    font-family: source-sans-pro;
-    src: url(/fonts/sourcesanspro.otf);
-}
 
-.font-ssp { font-family: source-sans-pro, sans-serif; }
+.font-ssp { font-family: 'Source Sans Pro', sans-serif; }
 
 
 /* -- PAGE/GENERAL STYLES -- */
 html, body {
     height: 100%;
-    font-family: source-sans-pro, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 button {
