@@ -2,19 +2,34 @@
     <head>
         <link href="main.css" rel="stylesheet" type="text/css">
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel='stylesheet' type='text/css'>
         <script src="main.js"></script>
     </head>
     <body>
-        <div class="flex-parent flex-hcenter flex-vcenter full-height">
-            <div id="content">
-                <div id="pattern-control">
-                    <!-- pattern-squares display here -->
+        <div class="row-fluid">
+            <!-- Main Page Body -->
+            <div class="flex-parent flex-hcenter flex-vcenter full-height col-md-9">
+                <div id="content">
+                    <div id="pattern-control">
+                        <!-- pattern-squares display here -->
+                    </div>
+                    <div class="flex-parent flex-hcenter">
+                        <button class="important-btn" onclick="sendPattern()"> to the curtain </button>
+                    </div>
                 </div>
-                <div class="flex-parent flex-hcenter">
-                    <button class="important-btn" onclick="sendPattern()"> to the curtain </button>
+            </div>
+
+            <!-- Sidebar for Pattern Save/Load -->
+            <div class="col-md-3">
+                <div id="toolbar">
+
+                </div>
+                <div id="saved-patterns">
+
                 </div>
             </div>
         </div>
+
 
         <script>reload();</script>
     </body>
