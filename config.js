@@ -1,8 +1,7 @@
-// List of permenently available GPIO pins
+// List of permenently available GPIO pins (all tested and operational)
 var GPIO = ['P8_7', 'P8_8', 'P8_9', 'P8_10', 'P8_11', 'P8_12', 'P8_13', 'P8_14', 'P8_15', 'P8_16',
             'P8_17', 'P8_18', 'P8_19', 'P8_26', 'P9_11', 'P9_12', 'P9_13', 'P9_14', 'P9_15', 'P9_16',
-            'P9_21', 'P9_22', 'P9_23', 'P9_24', 'P9_26', 'P9_27', 'P9_28', 'P9_29', 'P9_30', 'P9_31',
-            'P9_41', 'P9_42']
+            'P9_21', 'P9_22', 'P9_23', 'P9_24', 'P9_26', 'P9_27', 'P9_30', 'P9_41', 'P9_42']
 
 // Only available if not connected to a monitor via HDMI
 var HDMI = ['P8_27', 'P8_28', 'P8_29', 'P8_30', 'P8_31', 'P8_32', 'P8_33', 'P8_34', 'P8_35', 'P8_36',
