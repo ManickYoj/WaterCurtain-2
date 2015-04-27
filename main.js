@@ -48,3 +48,20 @@ function sendPattern() {
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(pattern));
 }
+
+// ----- Here be Angular ----- //
+// Create module
+var app = angular.module("WaterCurtain", [])
+
+// Define controllers
+function patternSaveCtrl($scope, $http) {
+
+    // Load patterns from server
+    $http.get('/patterns')
+        .success(function(data){ $scope.patterns = data; })
+        .error(function(data, status) { console.error("Server error retrieving patterns. Status " + status + ".")});
+
+}
+
+// Load Controllers
+app.controller("PatternSaveCtrl", ['$scope', '$http', patternSaveCtrl])

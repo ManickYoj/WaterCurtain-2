@@ -9,7 +9,8 @@ var PORT = process.env.PORT || 8888;
 var ROUTES = {
     '/' : index,
     '/main.css' : function (req, res) { loadFile(req, res, './main.css'); },
-    '/main.js' : function (req, res) { loadFile(req, res, './main.js'); }
+    '/main.js' : function (req, res) { loadFile(req, res, './main.js'); },
+    '/patterns' : function (req, res) { sendPatterns (req, res); }
 };
 
 // Define request handler
@@ -56,6 +57,12 @@ function loadFile(req, res, filepath) {
         }
     });
 };
+
+function sendPatterns (req, res) {
+    // TODO: Make this work
+    res.writeHead();
+    res.end()
+}
 
 
 // Listen

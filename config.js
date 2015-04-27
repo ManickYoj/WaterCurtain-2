@@ -15,5 +15,5 @@ var PIN_LIST = GPIO.concat(HDMI);
 module.exports = {
     ROW_DURATION: 100,
     PIN_LIST: PIN_LIST,
-    TEST_MODE: false
+    TEST_MODE: true
 };
