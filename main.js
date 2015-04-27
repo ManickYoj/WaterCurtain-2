@@ -32,7 +32,6 @@ function updatePattern(event, row, col) {
     if (mouseDown){
         pattern[row][col] = !Boolean(pattern[row][col]);
         event.target.setAttribute("data-set", Boolean(pattern[row][col]));
-        console.log("row, col: "+row+", "+col)
     }
 }
 
