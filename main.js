@@ -1,11 +1,14 @@
 //CONFIG
-ROWS = 10;
-COLS = 10;
+ROWS = 20;
+COLS = 49;
 pattern = [];
+mouseDown = false;
 
 function reload() {
     var pattern_control = document.querySelector("#pattern-control");
     pattern_control.innerHTML = "";
+    document.onmousedown = function(){mouseDown = true};
+    document.onmouseup = function(){mouseDown = false};
 
     for (var r = 0; r < ROWS; r++) (function(r) {
         pattern[r] = [];
@@ -18,7 +21,7 @@ function reload() {
 
             var col_elem = document.createElement('div');
             col_elem.className = 'pattern-box';
-            col_elem.onclick = function (event) { updatePattern(event, r, c) };
+            col_elem.onmouseover = function (event) { updatePattern(event, r, c) };
             col_elem.setAttribute('data-set', false);
             row_elem.appendChild(col_elem);
         })(c);
@@ -26,8 +29,10 @@ function reload() {
 }
 
 function updatePattern(event, row, col) {
-    pattern[row][col] = !Boolean(pattern[row][col]);
-    event.target.setAttribute("data-set", Boolean(pattern[row][col]));
+    if (mouseDown){
+        pattern[row][col] = !Boolean(pattern[row][col]);
+        event.target.setAttribute("data-set", Boolean(pattern[row][col]));
+    }
 }
 
 function sendPattern() {
