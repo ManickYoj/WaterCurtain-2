@@ -10,9 +10,6 @@ var HDMI = ['P8_27', 'P8_28', 'P8_29', 'P8_30', 'P8_31', 'P8_32', 'P8_33', 'P8_3
 // Only available if using an SD card, rather than loading from onboard memory
 var eMMC = ['P8_3', 'P8_4', 'P8_5', 'P8_6', 'P8_20', 'P8_21', 'P8_22', 'P8_23', 'P8_24', 'P8_25']
 
-// May or may not be available: need testing.
-var experimental = ['P9_33', 'P9_34', 'P9_35', 'P9_36', 'P9_37', 'P9_38', 'P9_39', 'P9_40']
-
 var PIN_LIST = GPIO.concat(HDMI);
 
 module.exports = {
