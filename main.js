@@ -1,6 +1,6 @@
 //CONFIG
 ROWS = 20;
-COLS = 60;
+COLS = 49;
 pattern = [];
 mouseDown = false;
 
