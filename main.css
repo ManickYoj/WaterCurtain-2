@@ -38,6 +38,12 @@ button {
     display: inline-block;
     border: 1px solid #222;
     box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .pattern-box:hover { border-color: white; }
 
@@ -58,4 +64,13 @@ button {
 
 .important-btn:hover {
     box-shadow: none;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
