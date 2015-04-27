@@ -36,7 +36,8 @@ var queuePattern = function(pattern) {
 */
 var runPattern = function(pattern) {
     // Check for hardware/software incompatability
-    if (cf.PIN_LIST.length < pattern[0].length) throw RangeError("Pattern too wide for available valves.");
+    if (cf.PIN_LIST.length < pattern[0].length)
+        return console.error("Pattern too wide for available valves.");
 
     // Set valves
     WRITE_FUNC(pattern[0]);
