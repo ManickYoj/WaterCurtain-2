@@ -33,11 +33,11 @@
                 <div id="saved-patterns" ng-controller="PatternSaveCtrl">
 
                     <!-- Pattern Loading Template -->
-                    <div class="saved-pattern font-ssp" ng-repeat="name for pattern in patterns">Pattern Name</div>
+                    <div class="saved-pattern font-ssp" ng-repeat="pattern in patterns" ng-click="loadPattern(pattern.pattern)">{{pattern.name}}</div>
                 </div>
             </div>
         </div>
-        <script>reload();</script>
+        <script>reload(true);</script>
     </body>
 </html>
 

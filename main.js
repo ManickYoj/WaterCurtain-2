@@ -4,28 +4,41 @@ COLS = 49;
 pattern = [];
 mouseDown = false;
 
-function reload() {
+function reload(reset) {
     var pattern_control = document.querySelector("#pattern-control");
     pattern_control.innerHTML = "";
     document.onmousedown = function(){mouseDown = true};
     document.onmouseup = function(){mouseDown = false};
 
     for (var r = 0; r < ROWS; r++) (function(r) {
-        pattern[r] = [];
+        if (reset) pattern[r] = [];
         var row_elem = document.createElement('div');
         row_elem.className = 'pattern-row';
         pattern_control.appendChild(row_elem);
 
         for (var c = 0; c < COLS; c++) (function(c) {
-            pattern[r][c] = false;
+            if (reset) pattern[r][c] = false;
 
             var col_elem = document.createElement('div');
             col_elem.className = 'pattern-box';
             col_elem.onmouseover = function (event) { updatePattern(event, r, c) };
-            col_elem.setAttribute('data-set', false);
+            col_elem.setAttribute('data-set', pattern[r][c]);
             row_elem.appendChild(col_elem);
         })(c);
     })(r);
+}
+
+// Debug utility for printing the current pattern to the console in human readable format
+function printPattern () {
+    var row_str = ''
+    for (var r = 0; r < ROWS; r++) (function(r) {
+        for (var c = 0; c < COLS; c++) (function(c) {
+            row_str += pattern[r][c] ? '1' : '0';
+        })(c);
+        row_str += '\n';
+    })(r);
+
+    console.log(row_str);
 }
 
 function updatePattern(event, row, col) {
@@ -35,6 +48,8 @@ function updatePattern(event, row, col) {
     }
 }
 
+// Sends the current pattern to the server
+// TODO: Create name submission rather than hardcoded 'Default'
 function sendPattern() {
     var xmlhttp;
 
@@ -46,7 +61,7 @@ function sendPattern() {
 
     xmlhttp.open("POST", '/', true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.send(JSON.stringify(pattern));
+    xmlhttp.send(JSON.stringify({name: 'Default', pattern: pattern}));
 }
 
 // ----- Here be Angular ----- //
@@ -55,12 +70,20 @@ var app = angular.module("WaterCurtain", [])
 
 // Define controllers
 function patternSaveCtrl($scope, $http) {
+    // Define Click Functions
+    $scope.loadPattern = function (data) {
+        pattern = data;
+        reload(false);
+    }
+
+    $scope.fetchPatterns = function () {
+        $http.get('/patterns')
+            .success(function(data){ $scope.patterns = data; })
+            .error(function(data, status) { console.error("Server error retrieving patterns. Status " + status + ".")});
+    }
 
     // Load patterns from server
-    $http.get('/patterns')
-        .success(function(data){ $scope.patterns = data; })
-        .error(function(data, status) { console.error("Server error retrieving patterns. Status " + status + ".")});
-
+    $scope.fetchPatterns();
 }
 
 // Load Controllers

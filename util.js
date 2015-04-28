@@ -1,3 +1,6 @@
+var fs = require('fs');
+var path = require('path');
+
 // Recieves a JSON object and passes it to a callback
 function recieveJSON(req, res, callback) {
     var data = '';

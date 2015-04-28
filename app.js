@@ -1,6 +1,8 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
+
+var util = require('./util');
 var config = require('./config');
 var hw = require('./hw-interface');
 
@@ -11,19 +13,19 @@ var PORT = process.env.PORT || 8888;
 var ROUTES = {
     '/' : index,
     '/patterns' : patterns,
-    '/main.css' : function (req, res) { loadFile(req, res, './main.css'); },
-    '/main.js' : function (req, res) { loadFile(req, res, './main.js'); }
+    '/main.css' : function (req, res) { util.loadFile(req, res, './main.css'); },
+    '/main.js' : function (req, res) { util.loadFile(req, res, './main.js'); }
 };
 
 
 // ----- Index Page Handler ----- //
 function index(req, res) {
     // Send index page
-    if (req.method === 'GET') loadFile(req, res, './index.html');
+    if (req.method === 'GET') util.loadFile(req, res, './index.html');
 
     // Run a pattern on the hardware, and add it to the database
-    else if (req.method === 'POST') recieveJSON(req, res, function (pattern) {
-        hw.queuePattern(pattern);
+    else if (req.method === 'POST') util.recieveJSON(req, res, function (pattern) {
+        hw.queuePattern(pattern.pattern);
         addPattern(pattern);
     });
 };
@@ -39,11 +41,11 @@ function patterns (req, res) {
     // Send patterns as JSON to front-end
     if (req.method === 'GET') {
         res.writeHead(200, { 'Content-Type': 'application/json'});
-        res.end(JSON.stringify(patterns))
+        res.end(JSON.stringify(saved_patterns))
     }
 
     // Save JSON encoded patterns in an object
-    else if (req.method === 'POST') recieveJSON(req, res, addPattern);
+    else if (req.method === 'POST') util.recieveJSON(req, res, addPattern);
 }
 
 // Utility for adding a pattern to the database, and shifting out old patterns

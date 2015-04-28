@@ -16,5 +16,5 @@ module.exports = {
     ROW_DURATION: 100,      // Number of milliseconds that each row represents
     PIN_LIST: PIN_LIST,     // Set of pins to make available for use
     STORED_PATTERNS: 50,    // Number of submitted patterns to store in memory
-    TEST_MODE: true         // Enable/disable software only 'test-mode'
+    TEST_MODE: false        // Enable/disable software only 'test-mode'
 };
