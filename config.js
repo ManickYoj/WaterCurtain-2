@@ -13,7 +13,8 @@ var eMMC = ['P8_3', 'P8_4', 'P8_5', 'P8_6', 'P8_20', 'P8_21', 'P8_22', 'P8_23', 
 var PIN_LIST = GPIO.concat(HDMI);
 
 module.exports = {
-    ROW_DURATION: 100,
-    PIN_LIST: PIN_LIST,
-    TEST_MODE: true
+    ROW_DURATION: 100,      // Number of milliseconds that each row represents
+    PIN_LIST: PIN_LIST,     // Set of pins to make available for use
+    STORED_PATTERNS: 50,    // Number of submitted patterns to store in memory
+    TEST_MODE: true         // Enable/disable software only 'test-mode'
 };
