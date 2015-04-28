@@ -1,61 +1,70 @@
 var bs = require('bonescript');
+var cf = require('./config');
 
-// TODO: Move to a config file
-// Config
-ON_DURATION = 100;
-OFF_DURATION = 100;
-PIN_LIST = genPinList("P8", 9, 5);
+var logLine = function (row, offset) {
+    for (var i = 0; i < row.length; i++) process.stdout.write(Boolean(row[i]) ? 'X' : '_');
+
+    // Newline
+    console.log();
+}
+
+var outputLine = function (row, offset) {
+    offset = offset || 0;
+    for (var i = offset; i < row.length + offset; i++)
+        bs.digitalWrite(cf.PIN_LIST[i], Boolean(row[i]) ? bs.HIGH : bs.LOW);
+}
+
+var closeAll = function () {
+    WRITE_FUNC(new Array(cf.PIN_LIST.length));
+}
+
+/** -- queuePattern
+*   Adds a pattern to the pattern_queue and, if no pattern is currently being run,
+*   kicks off a new runPatterns thread.
+*/
+
+var queuePattern = function(pattern) {
+    if( Object.prototype.toString.call( pattern ) === '[object Array]' ) {
+        pattern_queue.push(pattern);
+        if (pattern_queue.length === 1) runPattern(pattern_queue[0]);
+    }  else console.error("Invalid pattern submission: " + pattern)
+}
+
+/** -- runPattern
+*   Recursively works its way through a pattern, turning the valves on or off, as
+*   specified by the pattern. Each pattern row is activated for the ROW_DURATION
+*/
+var runPattern = function(pattern) {
+    // Check for hardware/software incompatability
+    if (cf.PIN_LIST.length < pattern[0].length)
+        return console.error("Pattern too wide for available valves.");
+
+    // Set valves
+    WRITE_FUNC(pattern[0]);
+
+    // Move to next row and continue after waiting for the ROW_DURATION
+    var reduced_pattern = pattern.slice(1);
+    if (reduced_pattern.length > 0)
+        setTimeout(function () { runPattern(reduced_pattern); }, cf.ROW_DURATION);
+
+    // Turn off valves after completion
+    else {
+        setTimeout(function () {
+            closeAll();
+
+            // Load in the next pattern
+            pattern_queue.shift();
+            if (pattern_queue.length !== 0) runPattern(pattern_queue[0]);
+        }, cf.ROW_DURATION);
+    }
+}
+
+/* ----- RUNNING CODE ----- */
+// Set up test mode or output mode based on config
+WRITE_FUNC = cf.TEST_MODE ? logLine : outputLine;
 
 // Setup Pins
-for (var i=0; i < pinList.length; i++) {
-    bs.pinMode(pinList[i], bs.OUTPUT);
-    bs.digitalWrite(pinList[i], bs.LOW);
-}
+if (!cf.TEST_MODE) for (var i=0; i < cf.PIN_LIST.length; i++) bs.pinMode(cf.PIN_LIST[i], bs.OUTPUT);
 
-function genPinList (header, start, number) {
-    pinList = [];
-
-    for (var i = start; i < start + number; i++)
-        pinList.push(header + "_" + i.toString());
-
-    return pinList;
-}
-
-module.exports.runPattern = function (pattern) {
-    // HARDCODE - pattern should be passed/loaded
-    pattern = [
-        [1,0,0,0,0],
-        [0,1,0,0,0],
-        [0,0,1,0,0],
-        [0,0,0,1,0],
-        [0,0,0,0,1]
-    ];
-
-
-    // Run pattern
-    runPatternRecursive(pattern);
-}
-
-/** -- runPatternRecursive
-*    Recursively works its way through a pattern, turning the valves on for the ON_DURATION
-*    for each row, and then off for OFF_DURATION after each row is complete.
-*/
-function runPatternRecursive (pattern) {
-    if (pinList.length > pattern[0].length) throw RangeError("Pattern too large for available valves.");
-
-    for (var i = 0; i < row.length; i++)
-         bs.digitalWrite(pinList[i], Boolean(row[i]) ? bs.HIGH : bs.LOW);
-
-    reduced_pattern = pattern.slice(1);
-    if (reduced_pattern.length > 0) setTimeout(delayRPR(reduced_pattern), ON_DURATION);
-}
-
-function delayRPR (pattern) {
-    setPins(PIN_LIST, bs.LOW);
-    setTimeout(runPatternRecursive(pattern), OFF_DURATION);
-}
-
-function setPins (pinList, value) {
-    for (var i = 0; i < pinList.length, i++) bs.digitalWrite(pinList[i], value);
-}
-/* ----- END runPatternRecursive functions ----- */
+pattern_queue = [];
+module.exports.queuePattern = queuePattern;
