@@ -1,64 +1,61 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
-var hw = require('./hw-interface');
 
+var util = require('./util');
+var config = require('./config');
+var hw = require('./hw-interface');
 
 // WebApp Config
 var PORT = process.env.PORT || 8888;
+
+// Define API routes
 var ROUTES = {
     '/' : index,
-    '/main.css' : function (req, res) { loadFile(req, res, './main.css'); },
-    '/main.js' : function (req, res) { loadFile(req, res, './main.js'); }
+    '/patterns' : patterns,
+    '/main.css' : function (req, res) { util.loadFile(req, res, './main.css'); },
+    '/main.js' : function (req, res) { util.loadFile(req, res, './main.js'); }
 };
 
-// Define request handler
+
+// ----- Index Page Handler ----- //
 function index(req, res) {
-    if (req.method === 'GET') loadFile(req, res, './index.html');
-    else if (req.method === 'POST') {
-        var data = '';
+    // Send index page
+    if (req.method === 'GET') util.loadFile(req, res, './index.html');
 
-        req.addListener('data', function(chunk) { data += chunk; });
-        req.addListener('end', function() {
-            // Load pattern into queue
-            var json_pattern = JSON.parse(data);
-            hw.queuePattern(json_pattern);
-
-            // Respond to client
-            res.writeHead(200, {'content-type': 'text/plain' });
-            res.end();
-        });
-    }
-};
-
-// Utility method for loading and serving an HTML file
-function loadFile(req, res, filepath) {
-    fs.readFile(filepath, function(error, content) {
-        // Send Server Error
-        if (error) {
-            res.writeHead(500);
-            res.end();
-        }
-
-        // Send Content
-        else {
-            // Set content type correctly.
-            var ext = path.extname(filepath);
-            var type = { 'content-type': 'text/plain' };
-
-            if (ext == '.html') type = { 'content-type': 'text/html' };
-            else if (ext == '.css') type = { 'content-type': 'text/css' };
-            else if (ext == '.js') type = { 'content-type': 'text/javascript' };
-
-            // Send response
-            res.writeHead(200, type);
-            res.end(content, 'utf-8');
-        }
+    // Run a pattern on the hardware, and add it to the database
+    else if (req.method === 'POST') util.recieveJSON(req, res, function (pattern) {
+        hw.queuePattern(pattern.pattern);
+        addPattern(pattern);
     });
 };
 
 
-// Listen
+
+// ----- Save/Load Patterns ----- //
+// Our beautiful pattern database.
+var saved_patterns = [];
+
+// The route handler for the pattern API
+function patterns (req, res) {
+    // Send patterns as JSON to front-end
+    if (req.method === 'GET') {
+        res.writeHead(200, { 'Content-Type': 'application/json'});
+        res.end(JSON.stringify(saved_patterns))
+    }
+
+    // Save JSON encoded patterns in an object
+    else if (req.method === 'POST') util.recieveJSON(req, res, addPattern);
+}
+
+// Utility for adding a pattern to the database, and shifting out old patterns
+function addPattern (pattern) {
+    saved_patterns.unshift(pattern);
+    if (saved_patterns.length >= config.STORED_PATTERNS) saved_patterns.pop();
+}
+
+
+// ----- Listen ----- //
 var server = http.createServer( function (req, res) {
     try { ROUTES[req.url](req, res); }
     catch (err) {
