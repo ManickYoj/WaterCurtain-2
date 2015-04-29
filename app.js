@@ -21,6 +21,7 @@ var ROUTES = {
 
 // ----- Index Page Handler ----- //
 function index(req, res) {
+    // Handles serving the index.html file when user does not enter a filepath
     if (req.method == 'GET') util.serveFile(req, res, './public/index.html');
 
     // Run a pattern on the hardware, and add it to the database
