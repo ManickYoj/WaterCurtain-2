@@ -1,30 +1,31 @@
+// Node imports
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
 
-var util = require('./util');
-var config = require('./config');
-var hw = require('./hw-interface');
+// Import server scripts
+var util = require('./server_scripts/util');
+var config = require('./server_scripts/config');
+var hw = require('./server_scripts/hw-interface');
 
 // WebApp Config
 var PORT = process.env.PORT || 8888;
+
 
 // Define API routes
 var ROUTES = {
     '/' : index,
     '/patterns' : patterns,
-    '/main.css' : function (req, res) { util.loadFile(req, res, './main.css'); },
-    '/main.js' : function (req, res) { util.loadFile(req, res, './main.js'); }
 };
 
 
 // ----- Index Page Handler ----- //
 function index(req, res) {
-    // Send index page
-    if (req.method === 'GET') util.loadFile(req, res, './index.html');
+    // Handles serving the index.html file when user does not enter a filepath
+    if (req.method == 'GET') util.serveFile(req, res, './public/index.html');
 
     // Run a pattern on the hardware, and add it to the database
-    else if (req.method === 'POST') util.recieveJSON(req, res, function (pattern) {
+    if (req.method === 'POST') util.recieveJSON(req, res, function (pattern) {
         hw.queuePattern(pattern.pattern);
         addPattern(pattern);
     });
@@ -57,10 +58,17 @@ function addPattern (pattern) {
 
 // ----- Listen ----- //
 var server = http.createServer( function (req, res) {
-    try { ROUTES[req.url](req, res); }
-    catch (err) {
-        console.error('Invalid page request. ERROR: ' + err);
-        res.writeHead(404, { 'Content-Type': 'text/html' });
-    }
+    util.public(req, res, function(public_err) {
+        if (public_err) {
+            try { ROUTES[req.url](req, res); }
+            catch (route_err) {
+                console.error("The request for " + req.url + " could not be handled.")
+                console.error(public_err);
+                console.error("Routing failed due to an error: " + route_err);
+
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+            }
+        }
+    });
 }).listen(PORT);
 console.log("Server listening on port " + PORT + ".");
