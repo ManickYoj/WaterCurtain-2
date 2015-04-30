@@ -27,7 +27,6 @@ function index(req, res) {
     // Run a pattern on the hardware, and add it to the database
     if (req.method === 'POST') util.recieveJSON(req, res, function (pattern) {
         hw.queuePattern(pattern.pattern);
-        addPattern(pattern);
     });
 };
 

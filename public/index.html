@@ -1,6 +1,6 @@
 <html ng-app="WaterCurtain">
     <head>
-       <title>Water Curtain</title>
+        <title>Water Curtain</title>
 
         <!--CSS Imports-->
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
@@ -26,16 +26,29 @@
             </div>
 
             <!-- Sidebar for Pattern Save/Load -->
-            <div class="col-md-3">
-                <div id="saved-pattern-title" class="font-ssp">Saved Patterns</div>
-                <div id="toolbar row">
+            <div class="col-md-3 row" ng-controller="PatternSaveCtrl">
+                <div class="col-md-11">
+                    <div id="saved-pattern-title" class="font-ssp">Saved Patterns</div>
+                    <div id="toolbar" class="row">
+                        <div class="col-md-12">
+                            <label>Pattern Name</label>
+                            <input ng-model="name" placeholder="Default">
+                        </div>
 
-                </div>
+                        <div class="std-btn col-md-6" ng-click="fetchPatterns()">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"> reload</span>
+                        </div>
 
-                <div id="saved-patterns" ng-controller="PatternSaveCtrl">
+                        <div class="std-btn col-md-6" ng-click="save()">
+                            <span class="glyphicon glyphicon-save" aria-hidden="true"> save</span>
+                        </div>
+                    </div>
 
-                    <!-- Pattern Loading Template -->
-                    <div class="saved-pattern font-ssp" ng-repeat="pattern in patterns" ng-click="loadPattern(pattern.pattern)">{{pattern.name}}</div>
+                    <div id="saved-patterns">
+
+                        <!-- Pattern Loading Template -->
+                        <div class="saved-pattern font-ssp" ng-repeat="pattern in patterns" ng-click="loadPattern(pattern.pattern)">{{pattern.name}}</div>
+                    </div>
                 </div>
             </div>
         </div>

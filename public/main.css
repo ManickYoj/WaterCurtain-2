@@ -30,6 +30,14 @@ button {
     border: 1px solid #222;
 }
 
+
+
+#toolbar {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #222;
+}
+
 .pattern-box {
     height: 1.3vw;
     width: 1.3vw;
@@ -66,6 +74,22 @@ button {
     box-shadow: none;
 }
 
+.std-btn {
+    padding: 1rem;
+
+    text-align: center;
+    letter-spacing: 1.2;
+
+    background-color: #EEE;
+    box-sizing: border-box;
+    color: #222;
+}
+
+.std-btn:hover {
+    background-color: #222;
+    color: white;
+}
+
 .saved-pattern {
     padding: 1rem;
 
@@ -90,4 +114,30 @@ button {
     letter-spacing: 1.4;
     font-size: 1.75rem;
     padding: 2rem;
+}
+
+/* -- Making forms pretty -- */
+label {
+	display: block;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	color: #222;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
+input {
+	display: block;
+	width: 100%;
+	font-size: 1.8rem;
+	border: 0;
+	color: #212121;
+	box-sizing: border-box;
+	outline: none;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.field {
+    display: block;
 }
