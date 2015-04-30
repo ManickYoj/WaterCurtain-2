@@ -1,7 +1,7 @@
 /* -- FONTS -- */
 @font-face {
     font-family: source-sans-pro;
-    src: url(/fonts/sourcesanspro.otf);
+    src: url('/fonts/ssp.otf');
 }
 
 .font-ssp { font-family: source-sans-pro, sans-serif; }
@@ -26,15 +26,13 @@ button {
 
 
 /* -- ELEMENT STYLING -- */
-#content {}
 #pattern-control {
-    border: 1px solid #222;}
-
-.pattern-row {
+    border: 1px solid #222;
 }
+
 .pattern-box {
-    height: 1.5vw;
-    width: 1.5vw;
+    height: 1.3vw;
+    width: 1.3vw;
     display: inline-block;
     border: 1px solid #222;
     box-sizing: border-box;
@@ -64,4 +62,30 @@ button {
 
 .important-btn:hover {
     box-shadow: none;
+}
+
+.saved-pattern {
+    padding: 1rem;
+
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.2;
+
+    background-color: #EEE;
+    border-bottom: 1px solid white;
+    color: #222;
+}
+
+.saved-pattern:hover {
+    background-color: #222;
+    color: white;
+}
+
+#saved-pattern-title {
+    color: #222;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 1.4;
+    font-size: 1.75rem;
+    padding: 2rem;
 }
