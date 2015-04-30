@@ -50,14 +50,16 @@ button {
 
 .important-btn {
     background-color: #222;
-    color: white;
-    font-weight: 700;
-    letter-spacing: .1rem;
+
     padding: .75rem;
     box-shadow: 4px 7px 10px -5px #444;;
     width: 100%;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+
+    color: white;
+    letter-spacing: 2.5;
+    text-transform: uppercase;
 }
 
 .important-btn:hover {
