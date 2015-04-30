@@ -49,8 +49,11 @@ function updatePattern(event, row, col) {
 }
 
 // Sends the current pattern to the server
-// TODO: Create name submission rather than hardcoded 'Default'
 function sendPattern() {
+    ajax("POST", "/", {name: 'Default', pattern: pattern});
+}
+
+function ajax(method, route, content) {
     var xmlhttp;
 
     // IE7+, Firefox, Chrome, Opera, Safari
@@ -59,9 +62,9 @@ function sendPattern() {
     // IE6, IE5
     else xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 
-    xmlhttp.open("POST", '/', true);
+    xmlhttp.open(method, route, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xmlhttp.send(JSON.stringify({name: 'Default', pattern: pattern}));
+    xmlhttp.send(JSON.stringify(content));
 }
 
 // ----- Here be Angular ----- //
@@ -80,6 +83,13 @@ function patternSaveCtrl($scope, $http) {
         $http.get('/patterns')
             .success(function(data){ $scope.patterns = data; })
             .error(function(data, status) { console.error("Server error retrieving patterns. Status " + status + ".")});
+    }
+
+    $scope.save = function () {
+        var name = $scope.name;
+        if (name === undefined || name === '') name = 'Default';
+        ajax('POST', '/patterns', {name: name, pattern: pattern})
+        $scope.fetchPatterns();
     }
 
     // Load patterns from server
