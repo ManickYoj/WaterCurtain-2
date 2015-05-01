@@ -57,7 +57,7 @@ button {
 [data-set=true] { background-color: #222; }
 
 .important-btn {
-    background-color: #222;
+    background-color: forestgreen;
 
     padding: .75rem;
     box-shadow: 4px 7px 10px -5px #444;;
@@ -89,6 +89,14 @@ button {
     background-color: #222;
     color: white;
 }
+
+#clear-btn {
+    background-color: palevioletred;
+    color: white;
+    margin-top: 2rem;
+}
+
+#clear-btn:hover { background-color: crimson; }
 
 .saved-pattern {
     padding: 1rem;
