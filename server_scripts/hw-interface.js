@@ -25,6 +25,10 @@ var closeAll = function () {
 
 var queuePattern = function(pattern) {
     if( Object.prototype.toString.call( pattern ) === '[object Array]' ) {
+
+        // Flip pattern
+        if (cf.FLIP_PATTERN) pattern.reverse();
+
         pattern_queue.push(pattern);
         if (pattern_queue.length === 1) runPattern(pattern_queue[0]);
     }  else console.error("Invalid pattern submission: " + pattern)
@@ -38,7 +42,6 @@ var runPattern = function(pattern) {
     // Check for hardware/software incompatability
     if (cf.PIN_LIST.length < pattern[0].length)
         return console.error("Pattern too wide for available valves.");
-
     // Set valves
     WRITE_FUNC(pattern[0]);
 
