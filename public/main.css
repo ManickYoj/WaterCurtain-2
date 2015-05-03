@@ -1,0 +1,151 @@
+/* -- FONTS -- */
+@font-face {
+    font-family: source-sans-pro;
+    src: url('/fonts/ssp.otf');
+}
+
+.font-ssp { font-family: source-sans-pro, sans-serif; }
+
+
+/* -- PAGE/GENERAL STYLES -- */
+html, body {
+    height: 100%;
+    font-family: source-sans-pro, sans-serif;
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+.full-height { height: 100%; }
+
+.flex-parent { display: flex; }
+.flex-hcenter { justify-content: center; }
+.flex-vcenter { align-items: center; }
+
+
+/* -- ELEMENT STYLING -- */
+#pattern-control {
+    border: 1px solid #222;
+}
+
+
+
+#toolbar {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #222;
+}
+
+.pattern-box {
+    height: 1.3vw;
+    width: 1.3vw;
+    display: inline-block;
+    border: 1px solid #222;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.pattern-box:hover { border-color: white; }
+
+[data-set=false] { background-color: transparent; }
+[data-set=true] { background-color: #222; }
+
+.important-btn {
+    background-color: forestgreen;
+
+    padding: .75rem;
+    box-shadow: 4px 7px 10px -5px #444;;
+    width: 100%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+
+    color: white;
+    letter-spacing: 2.5;
+    text-transform: uppercase;
+}
+
+.important-btn:hover {
+    box-shadow: none;
+}
+
+.std-btn {
+    padding: 1rem;
+
+    text-align: center;
+    letter-spacing: 1.2;
+
+    background-color: #EEE;
+    box-sizing: border-box;
+    color: #222;
+}
+
+.std-btn:hover {
+    background-color: #222;
+    color: white;
+}
+
+#clear-btn {
+    background-color: palevioletred;
+    color: white;
+    margin-top: 2rem;
+}
+
+#clear-btn:hover { background-color: crimson; }
+
+.saved-pattern {
+    padding: 1rem;
+
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.2;
+
+    background-color: #EEE;
+    border-bottom: 1px solid white;
+    color: #222;
+}
+
+.saved-pattern:hover {
+    background-color: #222;
+    color: white;
+}
+
+#saved-pattern-title {
+    color: #222;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 1.4;
+    font-size: 1.75rem;
+    padding: 2rem;
+}
+
+/* -- Making forms pretty -- */
+label {
+	display: block;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	color: #222;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
+input {
+	display: block;
+	width: 100%;
+	font-size: 1.8rem;
+	border: 0;
+	color: #212121;
+	box-sizing: border-box;
+	outline: none;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.field {
+    display: block;
+}
