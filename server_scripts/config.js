@@ -16,5 +16,6 @@ module.exports = {
     ROW_DURATION: 100,      // Number of milliseconds that each row represents
     PIN_LIST: PIN_LIST,     // Set of pins to make available for use
     STORED_PATTERNS: 50,    // Number of submitted patterns to store in memory
+    FLIP_PATTERN: true,     // Flip the pattern vertically on the server
     TEST_MODE: false        // Enable/disable software only 'test-mode'
 };
