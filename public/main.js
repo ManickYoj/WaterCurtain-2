@@ -61,7 +61,7 @@ function ajax(method, route, content) {
 
     // IE6, IE5
     else xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-
+    console.log(JSON.stringify(content))
     xmlhttp.open(method, route, true);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(content));

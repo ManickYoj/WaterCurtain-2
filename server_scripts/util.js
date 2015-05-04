@@ -14,8 +14,9 @@ function recieveJSON(req, res, callback) {
 
     req.addListener('data', function(chunk) { data += chunk; });
     req.addListener('end', function() {
-        console.log(JSON.parse(data));
+        console.log(data);
         callback(JSON.parse(data));
+        console.log('test');
 
         // Respond to client
         res.writeHead(200, {'content-type': 'text/plain' });
