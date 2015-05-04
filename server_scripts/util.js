@@ -14,6 +14,7 @@ function recieveJSON(req, res, callback) {
 
     req.addListener('data', function(chunk) { data += chunk; });
     req.addListener('end', function() {
+        console.log(JSON.parse(data));
         callback(JSON.parse(data));
 
         // Respond to client
