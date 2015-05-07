@@ -1,6 +1,6 @@
 <html ng-app="WaterCurtain">
     <head>
-       <meta charset="UTF-8">
+        <meta charset="UTF-8">
 
         <title>Water Curtain</title>
 
@@ -21,11 +21,11 @@
                     <div id="pattern-control">
                         <!-- pattern-squares display here -->
                     </div>
-                    <div class="flex-parent flex-hcenter">
-                        <button class="important-btn font-ssp" onclick="sendPattern()">send it to the curtain </button>
-                    </div>
+                    <br>
                     <div class="row">
-                        <div id="clear-btn" class="std-btn col-md-4 col-md-offset-4" onclick="reload(true)">Clear Pattern</div>
+                        <button id="clear-btn" class="col-md-4 std-btn" onclick="reload(true)">Clear Pattern</button>
+                        <button class="col-md-4 std-btn" onclick="invertPattern()">Invert Pattern</button>
+                        <button id="send-btn" class="col-md-4 std-btn font-ssp" onclick="sendPattern()">Send it to the Curtain </button>
                     </div>
                 </div>
             </div>
