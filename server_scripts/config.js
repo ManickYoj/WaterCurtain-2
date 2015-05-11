@@ -21,7 +21,7 @@ var GPIO_INT3 = [30, 60, 31, 48, 51, 3, 2, 49, 15, 14, 125, 112, 20, 7]
 var PIN_LIST = GPIO_INT1.concat(GPIO_INT2, GPIO_INT3);
 
 module.exports = {
-    ROW_DURATION: 20,      // Number of milliseconds that each row represents
+    ROW_DURATION: 1,      // Number of milliseconds that each row represents
     PIN_LIST: PIN_LIST,     // Set of pins to make available for use
     STORED_PATTERNS: 50,    // Number of submitted patterns to store in memory
     FLIP_PATTERN: true,     // Flip the pattern vertically on the server
