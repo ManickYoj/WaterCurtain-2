@@ -49,7 +49,7 @@ var runPattern = function(pattern) {
     // Move to next row and continue after waiting for the ROW_DURATION
     var reduced_pattern = pattern.slice(1);
     if (reduced_pattern.length > 0)
-        nt.setTimeout(function () { runPattern(reduced_pattern); }, cf.ROW_DURATION);
+        nt.setTimeout(function () { runPattern(reduced_pattern); }, +cf.ROW_DURATION + 'm');
 
     // Turn off valves after completion
     else {
