@@ -1,4 +1,4 @@
-var bs = require('bonescript');
+var of = require('onoff');
 var cf = require('./config');
 
 var logLine = function (row, offset) {
@@ -11,7 +11,7 @@ var logLine = function (row, offset) {
 var outputLine = function (row, offset) {
     offset = offset || 0;
     for (var i = offset; i < row.length + offset; i++)
-        bs.digitalWrite(cf.PIN_LIST[i], Boolean(row[i]) ? bs.HIGH : bs.LOW);
+        GPIOs[i].writeSync(Boolean(row[i]) ? 1 : 0));
 }
 
 var closeAll = function () {
@@ -66,8 +66,10 @@ var runPattern = function(pattern) {
 // Set up test mode or output mode based on config
 WRITE_FUNC = cf.TEST_MODE ? logLine : outputLine;
 
+GPIOs = [];
+
 // Setup Pins
-if (!cf.TEST_MODE) for (var i=0; i < cf.PIN_LIST.length; i++) bs.pinMode(cf.PIN_LIST[i], bs.OUTPUT);
+if (!cf.TEST_MODE) for (var i=0; i < cf.PIN_LIST.length; i++) GPIOs.push(of.Gpio(PIN_LIST[i], 'out'));
 
 pattern_queue = [];
 module.exports.queuePattern = queuePattern;

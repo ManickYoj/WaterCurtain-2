@@ -9,7 +9,16 @@ var GPIO = ['P8_7', 'P8_8', 'P8_9', 'P8_10', 'P8_11', 'P8_12', 'P8_13', 'P8_14',
 // Only available if using an SD card, rather than loading from onboard memory
 var eMMC = ['P8_3', 'P8_4', 'P8_5', 'P8_6', 'P8_20', 'P8_21', 'P8_22', 'P8_23', 'P8_24', 'P8_25']
 
-var PIN_LIST = GPIO;
+var eMMC_INT1 = [38, 39, 34, 35]
+var GPIO_INT1 = [66, 67, 69, 68, 45, 44, 23, 26, 47, 46, 27, 65, 22]
+var eMMC_INT2 = [63, 62, 37, 36, 33, 32]
+var GPIO_INT2 = [61]
+var HDMI_INT1 = [86, 88, 87, 89, 10, 11, 9, 81, 8, 80, 78, 79, 76,
+                 77, 74, 75, 72, 73, 70, 71]
+var GPIO_INT3 = [30, 60, 31, 48, 51, 3, 2, 49, 15, 14, 125, 112, 20, 7]
+
+
+var PIN_LIST = GPIO_INT1.concat(GPIO_INT2, GPIO_INT3);
 
 module.exports = {
     ROW_DURATION: 100,      // Number of milliseconds that each row represents
