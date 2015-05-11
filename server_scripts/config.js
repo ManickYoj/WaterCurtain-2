@@ -18,7 +18,7 @@ var HDMI_INT1 = [86, 88, 87, 89, 10, 11, 9, 81, 8, 80, 78, 79, 76,
 var GPIO_INT3 = [30, 60, 31, 48, 51, 3, 2, 49, 15, 14, 125, 112, 20, 7]
 
 
-var PIN_LIST = GPIO_INT1.concat(GPIO_INT2, GPIO_INT3);
+var PIN_LIST = GPIO_INT1.concat(GPIO_INT2, GPIO_INT3, HDMI_INT1);
 
 module.exports = {
     ROW_DURATION: 1,      // Number of milliseconds that each row represents
