@@ -69,7 +69,7 @@ WRITE_FUNC = cf.TEST_MODE ? logLine : outputLine;
 GPIOs = [];
 
 // Setup Pins
-if (!cf.TEST_MODE) for (var i=0; i < cf.PIN_LIST.length; i++) GPIOs.push(of.Gpio(PIN_LIST[i], 'out'));
+if (!cf.TEST_MODE) for (var i=0; i < cf.PIN_LIST.length; i++) GPIOs.push(of.Gpio(cf.PIN_LIST[i], 'out'));
 
 pattern_queue = [];
 module.exports.queuePattern = queuePattern;
