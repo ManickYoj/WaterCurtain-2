@@ -1,5 +1,6 @@
 var of = require('onoff');
 var cf = require('./config');
+var NanoTimer = require('nanotimer');
 
 var logLine = function (row, offset) {
     for (var i = 0; i < row.length; i++) process.stdout.write(Boolean(row[i]) ? 'X' : '_');
@@ -48,7 +49,7 @@ var runPattern = function(pattern) {
     // Move to next row and continue after waiting for the ROW_DURATION
     var reduced_pattern = pattern.slice(1);
     if (reduced_pattern.length > 0)
-        setTimeout(function () { runPattern(reduced_pattern); }, cf.ROW_DURATION);
+        nt.setTimeout(function () { runPattern(reduced_pattern); }, cf.ROW_DURATION);
 
     // Turn off valves after completion
     else {
@@ -65,6 +66,7 @@ var runPattern = function(pattern) {
 /* ----- RUNNING CODE ----- */
 // Set up test mode or output mode based on config
 WRITE_FUNC = cf.TEST_MODE ? logLine : outputLine;
+nt = new NanoTimer();
 
 GPIOs = [];
 
