@@ -61,7 +61,6 @@ button {
 
     padding: .75rem;
     box-shadow: 4px 7px 10px -5px #444;;
-    width: 100%;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 
@@ -91,12 +90,18 @@ button {
 }
 
 #clear-btn {
-    background-color: palevioletred;
+    background-color: darkred;
     color: white;
-    margin-top: 2rem;
 }
 
-#clear-btn:hover { background-color: crimson; }
+#clear-btn:hover { background-color: firebrick; }
+
+#send-btn {
+    background-color: darkslategrey;
+    color: white;
+}
+
+#send-btn:hover { background-color: steelblue; }
 
 .saved-pattern {
     padding: 1rem;

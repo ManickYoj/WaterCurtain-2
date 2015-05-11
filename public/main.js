@@ -50,6 +50,16 @@ function toggleClicked(event, row, col) {
     event.target.setAttribute("data-set", Boolean(pattern[row][col]));
 }
 
+function invertPattern() {
+    for (var r = 0; r < ROWS; r++) (function(r) {
+        for (var c = 0; c < COLS; c++) (function(c) {
+            pattern[r][c] = !Boolean(pattern[r][c]);
+        })(c);
+    })(r);
+
+    reload(false);
+}
+
 function updatePattern(event, row, col) {
     if (mouseDown){
         pattern[row][col] = clickState;
