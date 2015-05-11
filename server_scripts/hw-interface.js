@@ -12,7 +12,7 @@ var logLine = function (row, offset) {
 var outputLine = function (row, offset) {
     offset = offset || 0;
     for (var i = offset; i < row.length + offset; i++)
-        GPIOs[i].write(Boolean(row[i]) ? 1 : 0);
+        GPIOs[i].writeSync(Boolean(row[i]) ? 1 : 0);
 }
 
 var closeAll = function () {
